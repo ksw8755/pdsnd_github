@@ -23,7 +23,7 @@ def get_filters():
     while city not in CITY_DATA:
         print('error: input for city among chicago, new york city and washington')
         city = input('input for city (chicago, new york city, washington)')
-        
+
     # TO DO: get user input for month (all, january, february, ... , june)
     month = input('input for month (all, january, february, ... , june)')
     while month not in months:
@@ -35,7 +35,7 @@ def get_filters():
     while day not in day_of_week:
         print('error: input for day of week (all, monday, tuesday, ... sunday)')
         month = input('input for day of week (all, monday, tuesday, ... sunday)')
-        
+
 
     print('-'*40)
     return city, month, day
@@ -64,7 +64,7 @@ def load_data(city, month, day):
 
     if day != 'all':
         df = df[df['day_of_week'] == day.title()]
-        
+
     return df
 
 
@@ -75,9 +75,10 @@ def time_stats(df):
     start_time = time.time()
 
     # TO DO: display the most common month
+    # change the codes 1 (section 4)
     common_month_number = df['Start Time'].dt.month.mode()[0]
-    most_common_month = months[common_month_number].title()
-    print('the most common month:', most_common_month)
+    # most_common_month = months[common_month_number].title()
+    print('the most common month:', months[common_month_number].title())
 
     # TO DO: display the most common day of week
     most_common_day_of_week = df['day_of_week'].mode()
@@ -111,7 +112,7 @@ def station_stats(df):
     # TO DO: display most frequent combination of start station and end station trip
     most_frequent_combination_start_station_end_station = df.loc[:. 'Start Station':'End Station'].mode()[0:]
     most_frequent_combination_start_station_end_station_number = df.groupby(['Start Station':'End Station']).size().max()
-    print('most frequent combination of start station and end station trip:', most_frequent_combination_start_station_end_station, most_frequent_combination_start_station_end_station_number) 
+    print('most frequent combination of start station and end station trip:', most_frequent_combination_start_station_end_station, most_frequent_combination_start_station_end_station_number)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
